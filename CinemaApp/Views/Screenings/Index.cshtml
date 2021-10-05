@@ -1,0 +1,81 @@
+﻿@model IEnumerable<CinemaApp.Models.Screening>
+
+@{
+    ViewData["Title"] = "Movies";
+}
+
+<h2>Today's program</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Title)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["TimeSortParm"]">Start</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Auditorium)
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["SeatsSortParm"]">Booked seats</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+
+            if (item.BookedTickets >= item.Auditorium.NumberOfSeats)
+            {
+                <tr class="danger">
+                    <td class="smallImage">
+                        <img src="@item.ImageUrl" alt="Movie" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Time)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Auditorium.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookedTickets) / @Html.DisplayFor(modelItem => item.Auditorium.NumberOfSeats)
+                    </td>
+                    <td>
+                        Buy tickets
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td class="smallImage">
+                        <img src="@item.ImageUrl" alt="Movie" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Time)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Auditorium.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookedTickets) / @Html.DisplayFor(modelItem => item.Auditorium.NumberOfSeats)
+
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id">Buy tickets</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

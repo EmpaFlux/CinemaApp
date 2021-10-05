@@ -1,0 +1,42 @@
+﻿@model CinemaApp.Models.Screening
+
+@{
+    ViewData["Title"] = "Booking Confirmation";
+}
+
+<h2>Booking Confirmation</h2>
+
+<div class="details">
+    <div class="bookTicketImg">
+        <img src="@Html.DisplayFor(model => @model.ImageUrl)" />
+    </div>
+    <div class="detailsText">
+        <dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Time)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Time)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Auditorium)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Auditorium.Name)
+            </dd>
+        </dl>
+        <hr />
+        <h3>Thank you for the purchase!</h3>
+    </div>
+</div>
+
+<hr />
+<div class="detailsLinks">
+    <a asp-action="Index">Return to Movies</a>
+</div>
